@@ -1,0 +1,82 @@
+﻿<ProgressBar x:Class="TCR.CoinDeposit.Controls.CustomProgressBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TCR.CoinDeposit.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="CustomProgressBarElement"
+             >
+    <!--<ProgressBar.Resources>
+        <Style TargetType="local:CustomProgressBar" >
+            <Setter Property="Orientation" Value="Vertical"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Value" Value="{Binding ElementName=CustomProgressBarElement, Path=TubeModel.TubeProgressBarValue}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="local:CustomProgressBar">
+                        <Grid x:Name="TemplateRoot" Opacity=".4" >
+                            <Rectangle Name="PART_Track"  >
+                                <Rectangle.Fill>
+                                    <SolidColorBrush Color="DarkBlue"></SolidColorBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+
+                            <DockPanel Margin="0">
+                                <Rectangle Name="PART_Indicator">
+                                </Rectangle>
+                                <Rectangle Name="Mask" MinWidth="{TemplateBinding Width}" Fill="Silver"/>
+                            </DockPanel>
+
+                            <ListView 
+                                          ItemsSource="{Binding ElementName=CustomProgressBarElement, Path=TubeModel.NumberOfFields}"                            
+                                          Background="Transparent" HorizontalContentAlignment="Right"
+                                          HorizontalAlignment="Center" VerticalAlignment="Top"
+                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                          Margin="0"
+                                          >
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="Margin" Value="0"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemTemplate >
+                                    <DataTemplate>
+                                        <StackPanel Background="Transparent" >
+                                            <Rectangle Fill="Transparent" Opacity=".6"
+                                                           Stroke="White" 
+                                                           VerticalAlignment="Top" HorizontalAlignment="Stretch" 
+                                                           Width="200" 
+                                                           Height="{Binding Path=FieldHeight}"   
+                                                           >
+                                            </Rectangle>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                <ListView.LayoutTransform>
+                                    <RotateTransform Angle="-90"/>
+                                </ListView.LayoutTransform>
+                            </ListView>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Orientation" Value="Vertical">
+                                <Setter Property="LayoutTransform" TargetName="TemplateRoot">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ProgressBar.Resources>-->
+</ProgressBar>

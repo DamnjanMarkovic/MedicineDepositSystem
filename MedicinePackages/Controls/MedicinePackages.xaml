@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Medicine.Packages.Controls.MedicinePackages"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Medicine.Packages.Controls"
+             xmlns:viewmodels="clr-namespace:TCR.CoinDeposit.ViewModels" 
+             xmlns:controls="clr-namespace:TCR.CoinDeposit.Controls"
+             mc:Ignorable="d"
+             >
+    <UserControl.DataContext>
+        <viewmodels:MainViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+
+        <Grid Background="DarkGray">
+            <ListView x:Name="listView"
+            ItemsSource="{Binding TubesList}"
+            Background="{x:Null}"
+            HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+            VerticalAlignment="Center"
+            BorderThickness="0"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                      >
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid x:Name="uniformGrid" Margin="0" 
+                                     Columns="{Binding NumberOfColumns}"
+                    />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate >
+                        <controls:TubeControl TubeModel="{Binding Path=.}" 
+                                              
+                            AddCoinAction="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MedicinePackages}}, Path=DataContext.AddCoin}"
+                            RemoveCoinAction="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MedicinePackages}}, Path=DataContext.RemoveCoin}"
+                            ActivateTubeAction="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MedicinePackages}}, Path=DataContext.ActivateTube}"
+                            Margin="10" Padding="0" 
+                            Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MedicinePackages}}, Path=DataContext.TubeWidth}"
+                             />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListView>
+        </Grid>
+
+    </Grid>
+</UserControl>
