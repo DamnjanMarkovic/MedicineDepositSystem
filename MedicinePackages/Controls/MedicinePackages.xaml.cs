@@ -23,6 +23,7 @@ namespace Medicine.Packages.Controls
         public MedicinePackages()
         {
             InitializeComponent();
+            Keyboard.KeyboardState = KeyboardState.NumericFlat;
         }
     }
 }

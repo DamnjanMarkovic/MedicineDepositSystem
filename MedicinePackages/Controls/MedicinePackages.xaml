@@ -3,17 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:Medicine.Packages.Controls"
              xmlns:local="clr-namespace:Medicine.Packages.Controls"
-             xmlns:viewmodels="clr-namespace:TCR.CoinDeposit.ViewModels" 
-             xmlns:controls="clr-namespace:TCR.CoinDeposit.Controls"
+             xmlns:viewmodels="clr-namespace:Medicine.Packages.ViewModels"
              mc:Ignorable="d"
              >
     <UserControl.DataContext>
         <viewmodels:MainViewModel/>
     </UserControl.DataContext>
-    <Grid>
 
-        <Grid Background="DarkGray">
+    <Grid Background="Gray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="140"/>
+        </Grid.RowDefinitions>
+
+        <!--Row 0: Full Progress bar-->
+        <Grid Grid.Row="0" >
             <ListView x:Name="listView"
             ItemsSource="{Binding TubesList}"
             Background="{x:Null}"
@@ -33,17 +39,53 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate >
                         <controls:TubeControl TubeModel="{Binding Path=.}" 
-                                              
                             AddCoinAction="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MedicinePackages}}, Path=DataContext.AddCoin}"
                             RemoveCoinAction="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MedicinePackages}}, Path=DataContext.RemoveCoin}"
                             ActivateTubeAction="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MedicinePackages}}, Path=DataContext.ActivateTube}"
-                            Margin="10" Padding="0" 
-                            Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MedicinePackages}}, Path=DataContext.TubeWidth}"
-                             />
+                            LostFocusCommand="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MedicinePackages}}, Path=DataContext.LostFocusCommand}"
+                            GotFocusCommand="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MedicinePackages}}, Path=DataContext.GotFocusCommand}"
+                                              
+                            Margin="10" Padding="0"
+                            Width="250" Height="340"                                              
+                                              />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListView>
         </Grid>
 
+
+        <!--Row 1: Buttons Apply / Cancel-->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" >
+            <Button x:Name="BtnApply" HorizontalAlignment="Center" VerticalContentAlignment="Center" 
+                    Style="{StaticResource TextBlockStandardButton}" VerticalAlignment="Center" 
+                    Command="{Binding ApplyCommand}" Width="500" Margin="10">
+                <StackPanel Orientation="Horizontal" >
+                    <Image Source="/Icons/ic_confirm_normal.png" Style="{StaticResource ImageForSmallStandardButton}" />
+                    <TextBlock Text="Confirm" Style="{StaticResource TextBlockForStandardButton}" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnCancel" HorizontalAlignment="Center" VerticalContentAlignment="Center" 
+                    Style="{StaticResource TextBlockStandardButton}" VerticalAlignment="Center" 
+                    Command="{Binding CancelCommand}" Width="500"  Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Icons/ic_cancel_normal.png" Style="{StaticResource ImageForSmallStandardButton}"/>
+                    <TextBlock Text="Cancel" Style="{StaticResource TextBlockForStandardButton}"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <!--Keyboard - Visible only when text entry is occurring-->
+        <StackPanel Grid.Row="1" Opacity="1" Orientation="Horizontal" HorizontalAlignment="Center" 
+                    Visibility="{Binding KeyboardVisibility}" 
+                    >
+            <controls:Keyboard Background="Black" Height="110"
+                    x:Name="Keyboard"             
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Stretch"/>
+
+        </StackPanel>
+
     </Grid>
+
 </UserControl>

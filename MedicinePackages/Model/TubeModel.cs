@@ -7,11 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace TCR.CoinDeposit.Model
+namespace Medicine.Packages.Model
 {
     public class TubeModel : BindableBase
     {
+        #region Properties
 
+        #region Tube Activation 
         private bool isActive = false;
         public bool IsActive
         {
@@ -45,7 +47,9 @@ namespace TCR.CoinDeposit.Model
                 RaisePropertyChanged(nameof(IsActiveDescription));
             }
         }
-        
+
+        #endregion
+
         private int tubePosition;
         public int TubePosition
         {
@@ -76,7 +80,6 @@ namespace TCR.CoinDeposit.Model
             {
                 tubeMaxValue = value;
                 RaisePropertyChanged(nameof(TubeMaxValue));
-                SetFieldsAndHeigh();
             }
         }
 
@@ -86,40 +89,15 @@ namespace TCR.CoinDeposit.Model
             get => tubevalue;
             set
             {
-                tubevalue = value;
-                RaisePropertyChanged(nameof(Tubevalue));
-                SetTubeProgressValue();
-            }
-        }
+                //Check if value is in the range (not higher then max value)
+                if (value <= TubeMaxValue)
+                {
+                    tubevalue = value;
+                    RaisePropertyChanged(nameof(Tubevalue));
 
-        private void SetTubeProgressValue()
-        {
-            //This is needed to show the progress bar accordingly
-            TubeProgressBarValue = (double)((100 * (double)Tubevalue) / (double)TubeMaxValue);
-        }
-
-        private void SetIsActiveTextColor()
-        {
-            switch (IsActive)
-            {
-                case true:
-                    OnOffButtonBackground = Brushes.Red;
-                    IsActiveDescription = "OFF";
-                    break;
-                case false:
-                    OnOffButtonBackground = Brushes.Green;
-                    IsActiveDescription = "ON";
-                    break;
-            }
-        }
-
-        private void SetFieldsAndHeigh()
-        {
-            NumberOfFields.Clear();
-            for (int i = 0; i < TubeMaxValue; i++)
-            {
-                //this is hardcoded, 250 is the height of the progress bar (where lines should be set)
-                NumberOfFields.Add(new FieldHeightModel() { FieldHeight = (350 / (double)TubeMaxValue), FieldWidth = 300 });
+                    // SetTubeProgressValue
+                    TubeProgressBarValue = (double)(100 * (double)Tubevalue / TubeMaxValue);
+                }
             }
         }
 
@@ -134,42 +112,49 @@ namespace TCR.CoinDeposit.Model
             }
         }
 
-        private ObservableCollection<FieldHeightModel> numberOfFields = new ObservableCollection<FieldHeightModel>();
-        public ObservableCollection<FieldHeightModel> NumberOfFields
+        private bool isTextBoxFocused = true;
+        public bool IsTextBoxFocused
         {
-            get => numberOfFields;
+            get => isTextBoxFocused;
             set
             {
-                numberOfFields = value;
-                RaisePropertyChanged(nameof(NumberOfFields));
+                isTextBoxFocused = value;
+                RaisePropertyChanged(nameof(IsTextBoxFocused));
             }
         }
 
 
-    }
 
-    public class FieldHeightModel : BindableBase
-    {
-        private double fieldHeight;
-        public double FieldHeight
+
+        #endregion
+
+        #region Funcs
+
+        /// <summary>
+        /// Sets buttons for Activate/Deactivate - Text and Color
+        /// </summary>
+        private void SetIsActiveTextColor()
         {
-            get => fieldHeight;
-            set
+            switch (IsActive)
             {
-                fieldHeight = value;
-                RaisePropertyChanged(nameof(FieldHeight));
+                case true:
+                    OnOffButtonBackground = Brushes.Red;
+                    IsActiveDescription = "OFF";
+                    break;
+                case false:
+                    OnOffButtonBackground = Brushes.Green;
+                    IsActiveDescription = "ON";
+                    break;
             }
         }
-
-        private double fieldWidth;
-        public double FieldWidth
+        /// <summary>
+        /// Func calculate progress bar in order to display it
+        /// </summary>
+        private void SetTubeProgressValue()
         {
-            get => fieldWidth;
-            set
-            {
-                fieldWidth = value;
-                RaisePropertyChanged(nameof(FieldWidth));
-            }
+            TubeProgressBarValue = (double)(100 * (double)Tubevalue / TubeMaxValue);
         }
+
+        #endregion
     }
 }

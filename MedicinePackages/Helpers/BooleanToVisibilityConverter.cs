@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace TCR.CoinDeposit.Helpers
+namespace Medicine.Packages.Helpers
 {
     public sealed class BooleanToVisibilityConverter : IValueConverter
     {

@@ -5,80 +5,47 @@
         <Setter Property="Background" Value="Red"/>
     </Style>
 
-
-    <!--Custom progress Bar-->
-    <Style x:Key="VerticalProgressBar" TargetType="{x:Type ProgressBar}" >
-        <Setter Property="Orientation" Value="Vertical"/>
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Style x:Key="TextBlockStandardButton" TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ProgressBar}">
-                    <Border BorderBrush="White" BorderThickness="1">
-                        <Grid x:Name="TemplateRoot" Opacity=".3" >
-                            <Rectangle Name="PART_Track"  >
-                                <Rectangle.Fill>
-                                    <SolidColorBrush Color="red"></SolidColorBrush>
-                                </Rectangle.Fill>
-                            </Rectangle>
-                            <DockPanel Margin="1">
-                                <Rectangle Name="PART_Indicator">
-                                </Rectangle>
-                                <Rectangle Name="Mask" MinWidth="{TemplateBinding Width}" Fill="Blue"/>
-                            </DockPanel>
-                            <!--<DockPanel>-->
-                                <ListView ItemsSource="{Binding Item1.NumberOfFields}" 
-                                          Background="Transparent" HorizontalContentAlignment="Right"
-                                          HorizontalAlignment="Center" VerticalAlignment="Top"
-                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                          Margin="0"
-                                          >
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="Padding" Value="0"/>
-                                        <Setter Property="Margin" Value="0"/>
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                                <ListView.ItemTemplate >
-                                        <DataTemplate>
-                                        <StackPanel Background="Transparent" >
-                                            <Rectangle Fill="Transparent" 
-                                                           Stroke="White" 
-                                                           VerticalAlignment="Top" HorizontalAlignment="Stretch" 
-                                                           Width="210" Height="{Binding FieldHeight}" >                                                    
-                                                </Rectangle>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                    <ListView.LayoutTransform>
-                                        <RotateTransform Angle="-90"/>
-                                    </ListView.LayoutTransform>
-                                </ListView>
-                                <!--<ListView>
-                                    
-                                </ListView>-->
-                                <!--<Rectangle Fill="Transparent" Stroke="White" VerticalAlignment="Stretch" Width="20" Margin="0 0 0 0"/>
-                                <Rectangle Fill="Transparent" Stroke="White" VerticalAlignment="Stretch" Width="20" Margin="0 0 0 0"/>
-                                <Rectangle Fill="Transparent" Stroke="White" VerticalAlignment="Stretch" Width="20" Margin="0 0 0 0"/>
-                                <Rectangle Fill="Transparent" Stroke="White" VerticalAlignment="Stretch" Width="20" Margin="0 0 0 0"/>
-                                <Rectangle Fill="Transparent" Stroke="White" VerticalAlignment="Stretch" Width="20" Margin="0 0 0 0"/>
-                                <Rectangle Fill="Transparent" Stroke="White" VerticalAlignment="Stretch" Width="20" Margin="0 0 0 0"/>
-                                <Rectangle Fill="Transparent" Stroke="White" VerticalAlignment="Stretch" Width="20" Margin="0 0 0 0"/>
-                                <Rectangle Fill="Transparent" Stroke="White" VerticalAlignment="Stretch" Width="20" Margin="0 0 0 0"/>
-                                <Rectangle Fill="Transparent" Stroke="White" VerticalAlignment="Stretch" Width="20" Margin="0 0 0 0"/>
-                                <Rectangle Fill="Transparent" Stroke="White" VerticalAlignment="Stretch" Width="20" Margin="0 0 0 0"/>-->
-                            <!--</DockPanel>-->
-                        </Grid>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border
+                        Name="AdminStandardButton"
+                        BorderBrush="#26D5EBFC"
+                        BorderThickness="2"
+                        CornerRadius="6"
+                        RenderTransformOrigin="0.5,0.5"
+                        TextBlock.Foreground="#FAF7FF"
+                        TextBlock.FontSize="36"
+                        Padding="0"
+                        Margin="5"
+                        MinWidth="420"
+                        Height="90"
+                        MaxHeight="122"
+                        MaxWidth="420">
 
+                        <Border.Background>
+                            <SolidColorBrush Opacity="0.8" Color="#19D5EBFC"></SolidColorBrush>
+                        </Border.Background>
+
+                        <ContentPresenter
+                            RecognizesAccessKey="True" Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
+                            SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}">
+                        </ContentPresenter>
                     </Border>
+
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Orientation" Value="Vertical">
-                            <Setter Property="LayoutTransform" TargetName="TemplateRoot">
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="AdminStandardButton" Property="CornerRadius" Value="8" />
+                            <Setter TargetName="AdminStandardButton" Property="SnapsToDevicePixels" Value="true" />
+                            <Setter TargetName="AdminStandardButton" Property="Background" Value="#8083A8FF"></Setter>
+                            <Setter TargetName="AdminStandardButton" Property="BorderThickness" Value="2"></Setter>
+                            <Setter TargetName="AdminStandardButton" Property="BorderBrush" Value="#D5EBFC"></Setter>
+                            <Setter TargetName="AdminStandardButton" Property="RenderTransform">
                                 <Setter.Value>
-                                    <RotateTransform Angle="-90"/>
+                                    <ScaleTransform ScaleX="1.05" ScaleY="1.05"></ScaleTransform>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
@@ -87,27 +54,18 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <!--<Setter Property="ToolTip">
-            <Setter.Value>
-                    <ToolTip Placement="Bottom" Visibility="Visible">
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Power Availability : "/>
-                                --><!--<TextBlock Width="{TemplateBinding Value}"/>--><!--
-                                <TextBlock Text="%"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Remaining Time : "/>
-                                --><!--<TextBlock Width="{TemplateBinding Value}"/>--><!--
-                                <TextBlock Text="min"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </ToolTip>
-            </Setter.Value>
-        </Setter>-->
-
     </Style>
-    
+
+    <Style x:Key="TextBlockForStandardButton" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#FAF7FF"></Setter>
+        <Setter Property="TextAlignment" Value="Center"></Setter>
+        <Setter Property="FontFamily" Value="../Fonts/OpenSans-Regular.ttf #Open Sans"></Setter>
+        <Setter Property="FontSize" Value="36"></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="MaxHeight" Value="90"></Setter>
+        <Setter Property="Padding" Value="1,0,1,0"></Setter>
+    </Style>
+
     <!--Custom Button-->
 
     <Style TargetType="Button" x:Key="RoundButton">
@@ -179,86 +137,19 @@
                                 >
                         </ContentPresenter>
                     </Border>
-                    <!--<ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Content" TargetName="contentPresenter" 
-                                Value="{Binding Path=MouseOverContentPresenter, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CustomButton}}}" />
-                            <Setter Property="Background" TargetName="border" Value="{Binding Path=BackgroundMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CustomButton}}}"/>
-
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter Property="Content" TargetName="contentPresenter" 
-                                Value="{Binding Path=KeyboardFocusedContentPresenter, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CustomButton}}}" />
-                            <Setter Property="Background" TargetName="border" Value="{Binding Path=BackgroundMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CustomButton}}}"/>
-
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Content" TargetName="contentPresenter" 
-                                        Value="{Binding Path=CheckedContentPresenter, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CustomButton}}}" />
-                            <Setter Property="Background" TargetName="border" Value="{Binding Path=BackgroundChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CustomButton}}}"/>
-
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            --><!--<Setter Property="Content" TargetName="contentPresenter" 
-                                        Value="{Binding Path=DisabledContentPresenter, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CustomButton}}}" />
-                                <Setter Property="Background" TargetName="border" Value="{Binding Path=BackgroundChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:CustomButton}}}"/>--><!--
-                            <Setter Property="Opacity" Value="0.7"/>
-
-                        </Trigger>
-                    </ControlTemplate.Triggers>-->
+                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
 
-
-
-
-
-
-    <!--<Style x:Key="CustomProgressBar" TargetType="ProgressBar">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ProgressBar}">
-                    <Grid>                        
-                        <Grid x:Name="TemplateRoot">
-                            <Rectangle Name="PART_Track" StrokeThickness="1" Fill="red">
-                                --><!--<Rectangle.Fill>
-                                    <SolidColorBrush Color="red"></SolidColorBrush>
-                                </Rectangle.Fill>--><!--
-                            </Rectangle>
-                            <DockPanel Margin="1">
-                                <Rectangle Name="PART_Indicator">
-                                </Rectangle>
-                                <Rectangle Name="Mask" MinWidth="{TemplateBinding Width}" Fill="Blue"/>
-                            </DockPanel>
-                        </Grid>
-                    <StackPanel Orientation="Vertical">
-                            <Rectangle Fill="Transparent" Stroke="White" HorizontalAlignment="Stretch" Height="19" Margin="0 0 0 1"/>
-                        <Rectangle Fill="Transparent" Stroke="White" HorizontalAlignment="Stretch" Height="19" Margin="0 0 0 1"/>
-                        <Rectangle Fill="Transparent" Stroke="White" HorizontalAlignment="Stretch" Height="19" Margin="0 0 0 1"/>
-                            <Rectangle Fill="Transparent" Stroke="White" HorizontalAlignment="Stretch" Height="19" Margin="0 0 0 1"/>
-                        <Rectangle Fill="Transparent" Stroke="White" HorizontalAlignment="Stretch" Height="19" Margin="0 0 0 1"/>
-                        <Rectangle Fill="Transparent" Stroke="White" HorizontalAlignment="Stretch" Height="19" Margin="0 0 0 1"/>
-                        <Rectangle Fill="Transparent" Stroke="White" HorizontalAlignment="Stretch" Height="19" Margin="0 0 0 1"/>
-                        <Rectangle Fill="Transparent" Stroke="White" HorizontalAlignment="Stretch" Height="19" Margin="0 0 0 1"/>
-                        <Rectangle Fill="Transparent" Stroke="White" HorizontalAlignment="Stretch" Height="19" Margin="0 0 0 1"/>
-                        <Rectangle Fill="Transparent" Stroke="White" HorizontalAlignment="Stretch" Height="19" Margin="0 0"/>
-                    </StackPanel>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>-->
-
-    <!--Orientation="Vertical" HorizontalContentAlignment="Stretch" 
-                             VerticalContentAlignment="Stretch" VerticalAlignment="Center"  
-                             SnapsToDevicePixels="True"-->
-
-
-
-
-
+    <Style x:Key="ImageForSmallStandardButton" TargetType="Image">
+        <Setter Property="Stretch" Value="Fill"></Setter>
+        <Setter Property="Width" Value="20"></Setter>
+        <Setter Property="Height" Value="20"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Margin" Value="0,5,10,0"></Setter>
+    </Style>
 
 </ResourceDictionary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Medicine.Packages.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TCR.CoinDeposit.Model;
 
-namespace TCR.CoinDeposit.Controls
+namespace Medicine.Packages.Controls
 {
     /// <summary>
     /// Interaction logic for TubeControl.xaml
@@ -46,8 +46,6 @@ namespace TCR.CoinDeposit.Controls
         public static readonly DependencyProperty RemoveCoinActionProperty =
             DependencyProperty.Register("RemoveCoinAction", typeof(ICommand), typeof(TubeControl));
 
-
-
         public ICommand ActivateTubeAction
         {
             get { return (ICommand)GetValue(ActivateTubeActionProperty); }
@@ -58,9 +56,40 @@ namespace TCR.CoinDeposit.Controls
 
 
 
+        public ICommand LostFocusCommand
+        {
+            get { return (ICommand)GetValue(LostFocusCommandProperty); }
+            set { SetValue(LostFocusCommandProperty, value); }
+        }
+        public static readonly DependencyProperty LostFocusCommandProperty =
+            DependencyProperty.Register("LostFocusCommand", typeof(ICommand), typeof(TubeControl));
+
+
+
+        public ICommand GotFocusCommand
+        {
+            get { return (ICommand)GetValue(GotFocusCommandProperty); }
+            set { SetValue(GotFocusCommandProperty, value); }
+        }
+        public static readonly DependencyProperty GotFocusCommandProperty =
+            DependencyProperty.Register("GotFocusCommand", typeof(ICommand), typeof(TubeControl));
+
+
+
+
         public TubeControl()
         {
             InitializeComponent();
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox senderTextBox = sender as TextBox;
+            if (string.IsNullOrEmpty(senderTextBox.Text))
+            {
+                TubeModel tubeModel = senderTextBox.DataContext as TubeModel;
+                tubeModel.Tubevalue = 0;
+            }
         }
     }
 }

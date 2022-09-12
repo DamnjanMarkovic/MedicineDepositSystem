@@ -61,16 +61,15 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsInput, Version=1.0.4.0, Culture=neutral, PublicKeyToken=9b287f7dc5073cad, processorArchitecture=MSIL">
+      <HintPath>..\packages\InputSimulator.1.0.4.0\lib\net20\WindowsInput.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\CustomProgressBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\MedicinePackages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,15 +86,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\CustomProgressBar.xaml.cs">
-      <DependentUpon>CustomProgressBar.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\CustomKeyboard\CapsKeyboardKey.cs" />
+    <Compile Include="Controls\CustomKeyboard\Keyboard.cs" />
+    <Compile Include="Controls\CustomKeyboard\KeyboardKey.cs" />
+    <Compile Include="Controls\CustomKeyboard\KeyboardState.cs" />
     <Compile Include="Controls\MedicinePackages.xaml.cs">
       <DependentUpon>MedicinePackages.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CustomKeyboard\ModifierChangedRoutedEventArgs.cs" />
+    <Compile Include="Controls\CustomKeyboard\ShiftKeyboardKey.cs" />
     <Compile Include="Controls\TubeControl.xaml.cs">
       <DependentUpon>TubeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CustomKeyboard\UnicodeKeyboardKey.cs" />
+    <Compile Include="Controls\CustomKeyboard\VirtualKeyKeyboardKey.cs" />
     <Compile Include="Helpers\BooleanToVisibilityConverter.cs" />
     <Compile Include="Model\TubeModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -104,6 +108,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Style\CommonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Keyboards.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,6 +147,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Icons\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
